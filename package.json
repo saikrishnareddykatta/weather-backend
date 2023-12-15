@@ -4,7 +4,8 @@
   "description": "backend app for weather updates",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "npm test"
   },
   "repository": {
