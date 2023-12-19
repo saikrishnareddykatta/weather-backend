@@ -21,8 +21,8 @@ app.use(express.json());
 
 // Define a route to handle GET and POST requests
 app.get("/test-users", (req, res) => {
-  const { cityName, countryName } = req.query;
-  console.log("***Query parameters", cityName, countryName);
+  // const { cityName, countryName } = req.query;
+  // console.log("***Query parameters", cityName, countryName);
   res.json(users);
 });
 
@@ -31,7 +31,12 @@ app.post("/register", async (req, res) => {
   try {
     const response = await axios.post(
       `${process.env.REGISTER_USER_URL}`,
-      payload
+      payload,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
     );
     if (response.status === 200) {
       const data = response.data.item;
