@@ -28,6 +28,7 @@ app.get("/test-users", (req, res) => {
 
 app.post("/register", async (req, res) => {
   const payload = { ...req.body };
+  console.log("***payload", payload);
   try {
     const response = await axios.post(
       `${process.env.REGISTER_USER_URL}`,
@@ -38,6 +39,7 @@ app.post("/register", async (req, res) => {
         },
       }
     );
+    console.log("***response", response);
     if (response.status === 200) {
       const data = response.data.item;
       res.json(data);
@@ -47,6 +49,7 @@ app.post("/register", async (req, res) => {
         .json({ error: "API Failed due to some issue" });
     }
   } catch (error) {
+    console.log("***error", error);
     res.status(500).json({ error: error, message: error?.message });
   }
 });
