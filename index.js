@@ -4,7 +4,8 @@ const axios = require("axios");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
 require("dotenv").config();
-const saltRounds = 10;
+const qrcode = require("qrcode");
+const { authenticator } = require("otplib");
 
 // Creating an Express application
 const app = express();
@@ -17,7 +18,35 @@ const users = [
   { id: 3, name: "Bob Johnson", age: 40 },
 ];
 
+// generating QR code
+const generateQRCode = async (username, secret) => {
+  try {
+    const uri = authenticator.keyuri(username, "Weather Vue Hub", secret);
+    const qrImage = await qrcode.toDataURL(uri);
+    const response = {
+      success: true,
+      tempSecret: secret,
+      qrImage,
+    };
+    return response;
+  } catch (error) {
+    const response = {
+      success: false,
+      message: error.message,
+      error,
+    };
+    return response;
+  }
+};
+
+// validating 2FA code and secret
+const validateTwoFactor = (code, secret) => {
+  return authenticator.check(code, secret);
+};
+
+// hashing the password
 async function hashPassword(password) {
+  const saltRounds = parseInt(process.env.SALT_ROUNDS, 10);
   return await bcrypt.hash(password, saltRounds);
 }
 
@@ -26,7 +55,6 @@ async function authenticateUser(userPassword, hashedPassword) {
     const passwordMatch = await bcrypt.compare(userPassword, hashedPassword);
     return passwordMatch;
   } catch (error) {
-    console.error("Password comparison error:", error);
     return error;
   }
 }
@@ -49,29 +77,124 @@ app.get("/test-users", (req, res) => {
 });
 
 app.post("/register", async (req, res) => {
-  const payload = { ...req.body };
-  const hashedPassword = await hashPassword(req.body.password);
-  payload.password = hashedPassword;
   try {
-    const response = await axios.post(
+    const hashedPassword = await hashPassword(req.body.password);
+    const secret = authenticator.generateSecret();
+    const qrResponse = await generateQRCode(req.body.username, secret);
+    if (qrResponse.success) {
+      const { tempSecret, qrImage } = qrResponse;
+      const payload = {
+        ...req.body,
+        password: hashedPassword,
+        secret: "",
+        tempSecret,
+        twoFactorEnabled: false,
+        functionType: "register",
+      };
+      const response = await axios.post(
+        `${process.env.CSP_ENDPOINT_URL}`,
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.status === 200) {
+        const { operation, message } = response.data;
+        const { username, id } = response.data.item;
+        res.json({
+          operation,
+          message,
+          user: {
+            username,
+            id,
+            qrImage,
+          },
+        });
+      } else {
+        res.status(response.status).json({
+          errorMessage:
+            "Unable to Register the User. API Failed due to Internal Error",
+        });
+      }
+    } else {
+      res.status(500).json({
+        errorMessage: qrResponse.message,
+        error: qrResponse.error,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      errorMessage: error.message
+        ? error.message
+        : "Register User API Failed due to Internal Error",
+      error: error,
+    });
+  }
+});
+
+app.post("/setuptwofactor", async (req, res) => {
+  const { username, code } = req.body;
+  try {
+    const tempSecretResponse = await axios.get(
       `${process.env.CSP_ENDPOINT_URL}`,
-      payload,
+      { data: { username, functionType: "getTwoFactorSecret" } },
       {
         headers: {
           "Content-Type": "application/json",
         },
       }
     );
-    if (response.status === 200) {
-      const { username } = response.data.item;
-      res.json({ username });
+    if (tempSecretResponse.status === 200) {
+      const { tempSecret } = tempSecretResponse.data.user;
+      const isValidation = validateTwoFactor(code, tempSecret);
+      if (isValidation) {
+        const response = await axios.post(
+          `${process.env.CSP_ENDPOINT_URL}`,
+          {
+            username,
+            secret: tempSecret,
+            tempSecret: "",
+            twoFactorEnabled: true,
+            functionType: "twoFactorSetup",
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (response.status === 200) {
+          const { operation, message } = response.data;
+          const { twoFactorEnabled } = response.data.user;
+          res.status(200).json({
+            operation,
+            message,
+            user: {
+              username,
+              twoFactorEnabled,
+            },
+          });
+        } else {
+          res.status(403).json({ errorMessage: "Unable to save the 2FA data" });
+        }
+      } else {
+        res
+          .status(402)
+          .json({ errorMessage: "Please enter the Valid 2FA code" });
+      }
     } else {
-      res
-        .status(response.status)
-        .json({ error: "API Failed due to some issue" });
+      res.status(tempSecretResponse.status).json({
+        errorMessage:
+          "Unable to Setup 2FA for the user. Please try after sometime",
+      });
     }
   } catch (error) {
-    res.status(500).json({ error: error, message: error?.message });
+    res.status(500).json({
+      errorMessage: "Setting User 2FA API Failed due to Internal Error",
+      error,
+    });
   }
 });
 
@@ -80,7 +203,7 @@ app.post("/login", async (req, res) => {
     const { username, password } = req.body;
     const response = await axios.get(
       `${process.env.CSP_ENDPOINT_URL}`,
-      { data: { username } },
+      { data: { username, functionType: "login" } },
       {
         headers: {
           "Content-Type": "application/json",
@@ -88,19 +211,94 @@ app.post("/login", async (req, res) => {
       }
     );
     if (response.status === 200) {
+      const { operation, message } = response.data;
+      const { twoFactorEnabled, tempSecret } = response.data.user;
       const hashedValue = response.data.user.password;
       const comparedValue = await authenticateUser(password, hashedValue);
       if (comparedValue) {
-        res.status(200).json({ message: "Login is successful", username });
+        if (twoFactorEnabled) {
+          res.status(200).json({
+            operation,
+            message,
+            user: {
+              username,
+              twoFactorEnabled,
+              qrImage: false,
+            },
+          });
+        } else {
+          const qrResponse = await generateQRCode(username, tempSecret);
+          if (qrResponse.success) {
+            const { qrImage } = qrResponse;
+            res.status(200).json({
+              operation,
+              message,
+              user: {
+                username,
+                twoFactorEnabled,
+                qrImage,
+              },
+            });
+          } else {
+            const { message, error } = qrResponse;
+            res.status(500).json({
+              errorMessage: message,
+              error,
+            });
+          }
+        }
       } else {
-        res.status(401).json({ message: "Invalid Credentials" });
+        res.status(401).json({ errorMessage: "Invalid Credentials" });
       }
     } else {
-      res.status(404).json({ message: "User is not found" });
+      res.status(404).json({ errorMessage: "User is not found" });
     }
   } catch (error) {
-    console.log(error);
-    res.status(500).json(users);
+    res.status(500).json({
+      errorMessage: "Login User API failed due to Internal Error",
+      error,
+    });
+  }
+});
+
+app.post("/verifytwoauth", async (req, res) => {
+  const { username, code } = req.body;
+  try {
+    const response = await axios.get(
+      `${process.env.CSP_ENDPOINT_URL}`,
+      { data: { username, functionType: "verifyTwoAuth" } },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.status === 200) {
+      const { operation, message } = response.data;
+      const { secret, twoFactorEnabled } = response.data.user;
+      const is2FAValid = validateTwoFactor(code, secret);
+      if (is2FAValid) {
+        res.status(200).json({
+          operation,
+          message,
+          user: {
+            username,
+            twoFactorEnabled,
+          },
+        });
+      } else {
+        res
+          .status(401)
+          .json({ errorMessage: "2FA Verification Failed, Please try again" });
+      }
+    } else {
+      res.status(404).json({ errorMessage: "User is not found" });
+    }
+  } catch (error) {
+    res.status(500).json({
+      errorMessage: "Verifying User 2FA API failed due to Internal Error",
+      error,
+    });
   }
 });
 
@@ -136,5 +334,5 @@ app.get("/city", async (req, res) => {
 
 // Start the server
 app.listen(port, () => {
-  console.log(`***Server is listening at http://localhost:${port}`);
+  console.log(`Server is Up and Running`);
 });
