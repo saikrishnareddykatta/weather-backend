@@ -4,7 +4,8 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
-const appRoute = require("./routes/route");
+const authRoute = require("./routes/authRoute");
+const weatherRoute = require("./routes/weatherRoute");
 const testRoute = require("./routes/testRoute");
 const notFound = require("./middleware/not-found");
 const errorHandlerMiddleWare = require("./middleware/error-handler");
@@ -13,7 +14,7 @@ const errorHandlerMiddleWare = require("./middleware/error-handler");
 const app = express();
 const port = 8000;
 
-// Use the cors middleware
+// Middleware setup
 app.use(cookieParser());
 app.use(
   cors({
@@ -24,8 +25,13 @@ app.use(
   })
 );
 app.use(express.json());
+
+// Routes Middleware
 app.use("/testRoute", testRoute);
-app.use("/weather", appRoute);
+app.use("/auth", authRoute);
+app.use("/weather", weatherRoute);
+
+// Error Handling Middleware
 app.use("*", notFound); // Routes to Not Found when unhandled route is entered
 app.use(errorHandlerMiddleWare); // Default Error Hanlders are need to written at the end of middleware function stack
 

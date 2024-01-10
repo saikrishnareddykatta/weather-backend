@@ -106,9 +106,36 @@ const getMarineWeather = async (lat, lon) => {
   }
 };
 
+const getAirQuality = async (lat, lon) => {
+  try {
+    const response = await axios.get(
+      `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=european_aqi,us_aqi,carbon_monoxide,nitrogen_dioxide,sulphur_dioxide,ozone,dust,uv_index,uv_index_clear_sky,ammonia&forecast_days=1`
+    );
+    if (response.status === 200) {
+      const { data } = response;
+      return {
+        status: 200,
+        data,
+      };
+    } else {
+      return {
+        status: 500,
+        errorMessage: "API failed due to Internal Issues",
+      };
+    }
+  } catch (error) {
+    return {
+      status: 400,
+      errorMessage: "Unable to fetch the data from the API",
+      error,
+    };
+  }
+};
+
 module.exports = {
   getCoordinates,
   getCurrentWeather,
   getForecastWeather,
   getMarineWeather,
+  getAirQuality,
 };

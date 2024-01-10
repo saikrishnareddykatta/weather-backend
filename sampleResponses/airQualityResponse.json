@@ -1,0 +1,33 @@
+{
+    "latitude": 32.800003,
+    "longitude": -117.2,
+    "elevation": 29,
+    "qirQualityUnits": {
+        "time": "iso8601",
+        "interval": "seconds",
+        "europeanAQI": "EAQI",
+        "usAQI": "USAQI",
+        "carbonMonoxide": "μg/m³",
+        "nitrogenDioxide": "μg/m³",
+        "sulphurDioxide": "μg/m³",
+        "ozone": "μg/m³",
+        "dust": "μg/m³",
+        "uvIndex": "",
+        "uvIndexClearSky": "",
+        "ammonia": "μg/m³"
+    },
+    "airQualityWeather": {
+        "time": "2024-01-10T21:00",
+        "interval": 3600,
+        "europeanAQI": 28,
+        "usAQI": 53,
+        "carbonMonoxide": 172,
+        "nitrogenDioxide": 8.6,
+        "sulphurDioxide": 2.4,
+        "ozone": 71,
+        "dust": 1,
+        "uvIndex": 1.7,
+        "uvIndexClearSky": 2.25,
+        "ammonia": null
+    }
+}

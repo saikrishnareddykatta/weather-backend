@@ -179,8 +179,49 @@ const marineWeatherResponse = (marineResponse) => {
   return response;
 };
 
+const airQualityWeatherResponse = (aqResponse) => {
+  const { latitude, longitude, elevation, current_units, current } = aqResponse;
+  const qirQualityUnits = {
+    time: current_units.time,
+    interval: current_units.interval,
+    europeanAQI: current_units.european_aqi,
+    usAQI: current_units.us_aqi,
+    carbonMonoxide: current_units.carbon_monoxide,
+    nitrogenDioxide: current_units.nitrogen_dioxide,
+    sulphurDioxide: current_units.sulphur_dioxide,
+    ozone: current_units.ozone,
+    dust: current_units.dust,
+    uvIndex: current_units.uv_index,
+    uvIndexClearSky: current_units.uv_index_clear_sky,
+    ammonia: current_units.ammonia,
+  };
+  const airQualityWeather = {
+    time: current.time,
+    interval: current.interval,
+    europeanAQI: current.european_aqi,
+    usAQI: current.us_aqi,
+    carbonMonoxide: current.carbon_monoxide,
+    nitrogenDioxide: current.nitrogen_dioxide,
+    sulphurDioxide: current.sulphur_dioxide,
+    ozone: current.ozone,
+    dust: current.dust,
+    uvIndex: current.uv_index,
+    uvIndexClearSky: current.uv_index_clear_sky,
+    ammonia: current.ammonia,
+  };
+  const response = {
+    latitude,
+    longitude,
+    elevation,
+    qirQualityUnits,
+    airQualityWeather,
+  };
+  return response;
+};
+
 module.exports = {
   currentWeatherResponse,
   forecastWeatherResponse,
   marineWeatherResponse,
+  airQualityWeatherResponse,
 };

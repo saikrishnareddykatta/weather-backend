@@ -1,19 +1,19 @@
-const { getCoordinates, getMarineWeather } = require("../../utils/apiHelper");
-const { marineWeatherResponse } = require("../../utils/responseHelper");
+const { getCoordinates, getAirQuality } = require("../../utils/apiHelper");
+const { airQualityWeatherResponse } = require("../../utils/responseHelper");
 
-const marineWeather = async (req, res) => {
+const airQuality = async (req, res) => {
   try {
     const response = await getCoordinates(req, res);
     if (response.status === 200) {
       const { lat, lng } = response.data;
-      const marineResponse = await getMarineWeather(lat, lng);
-      if (marineResponse.status === 200) {
-        const { data } = marineResponse;
+      const airQualityResponse = await getAirQuality(lat, lng);
+      if (airQualityResponse.status === 200) {
+        const { data } = airQualityResponse;
         // need to add a helper function to format the data
-        const formattedMarineData = marineWeatherResponse(data);
-        res.status(200).json(formattedMarineData);
+        const formattedAQData = airQualityWeatherResponse(data);
+        res.status(200).json(formattedAQData);
       } else {
-        const { status, errorMessage } = marineResponse;
+        const { status, errorMessage } = airQualityResponse;
         res.status(status).json({
           errorMessage,
         });
@@ -32,5 +32,5 @@ const marineWeather = async (req, res) => {
 };
 
 module.exports = {
-  marineWeather,
+  airQuality,
 };
