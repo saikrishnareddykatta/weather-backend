@@ -1,0 +1,576 @@
+{
+    "latitude": 42.3316,
+    "longitude": -83.0466,
+    "geographics": {
+        "cityName": "Detroit",
+        "country": "US",
+        "population": 713777
+    },
+    "timestamps": {
+        "sunrise": 1704805246,
+        "sunset": 1704838623,
+        "timezoneShift": -18000
+    },
+    "forecastedWeather": {
+        "1704855600": {
+            "forecastWeather": {
+                "temperature": 6.02,
+                "feelsLike": 1.45,
+                "minTemperature": 3.87,
+                "maxTemperature": 6.02,
+                "seaLevelPressure": 976,
+                "groundLevelPressure": 957,
+                "pressure": 976,
+                "humidity": 96
+            },
+            "weatherConditions": {
+                "id": 500,
+                "icon": "10n",
+                "description": "light rain",
+                "weatherType": "Rain"
+            },
+            "cloudinessPercentage": 100,
+            "windConditions": {
+                "speed": 8.15,
+                "degree": 213,
+                "gust": 14.68
+            },
+            "visibility": 2392,
+            "probabilityOfPrecipitation": 1,
+            "snowConditions": {
+                "lastThreeHour": 0
+            },
+            "rainConditions": {
+                "lastThreeHour": 2.85
+            },
+            "timestamp": {
+                "UTC": "2024-01-10 03:00:00"
+            }
+        },
+        "1704866400": {
+            "forecastWeather": {
+                "temperature": 4.85,
+                "feelsLike": -0.34,
+                "minTemperature": 2.52,
+                "maxTemperature": 4.85,
+                "seaLevelPressure": 977,
+                "groundLevelPressure": 958,
+                "pressure": 977,
+                "humidity": 92
+            },
+            "weatherConditions": {
+                "id": 600,
+                "icon": "13n",
+                "description": "light snow",
+                "weatherType": "Snow"
+            },
+            "cloudinessPercentage": 100,
+            "windConditions": {
+                "speed": 9.05,
+                "degree": 220,
+                "gust": 17.54
+            },
+            "visibility": 10000,
+            "probabilityOfPrecipitation": 1,
+            "snowConditions": {
+                "lastThreeHour": 1.43
+            },
+            "rainConditions": {
+                "lastThreeHour": 0
+            },
+            "timestamp": {
+                "UTC": "2024-01-10 06:00:00"
+            }
+        },
+        "1704877200": {
+            "forecastWeather": {
+                "temperature": 2.56,
+                "feelsLike": -3.06,
+                "minTemperature": 0.83,
+                "maxTemperature": 2.56,
+                "seaLevelPressure": 979,
+                "groundLevelPressure": 958,
+                "pressure": 979,
+                "humidity": 96
+            },
+            "weatherConditions": {
+                "id": 600,
+                "icon": "13n",
+                "description": "light snow",
+                "weatherType": "Snow"
+            },
+            "cloudinessPercentage": 100,
+            "windConditions": {
+                "speed": 8.18,
+                "degree": 226,
+                "gust": 15.71
+            },
+            "visibility": 134,
+            "probabilityOfPrecipitation": 0.95,
+            "snowConditions": {
+                "lastThreeHour": 1.5
+            },
+            "rainConditions": {
+                "lastThreeHour": 0
+            },
+            "timestamp": {
+                "UTC": "2024-01-10 09:00:00"
+            }
+        },
+        "1704888000": {
+            "forecastWeather": {
+                "temperature": -0.15,
+                "feelsLike": -6.18,
+                "minTemperature": -0.15,
+                "maxTemperature": -0.15,
+                "seaLevelPressure": 985,
+                "groundLevelPressure": 963,
+                "pressure": 985,
+                "humidity": 84
+            },
+            "weatherConditions": {
+                "id": 600,
+                "icon": "13n",
+                "description": "light snow",
+                "weatherType": "Snow"
+            },
+            "cloudinessPercentage": 100,
+            "windConditions": {
+                "speed": 7.16,
+                "degree": 286,
+                "gust": 13.95
+            },
+            "visibility": 10000,
+            "probabilityOfPrecipitation": 1,
+            "snowConditions": {
+                "lastThreeHour": 0.91
+            },
+            "rainConditions": {
+                "lastThreeHour": 0
+            },
+            "timestamp": {
+                "UTC": "2024-01-10 12:00:00"
+            }
+        },
+        "1704898800": {
+            "forecastWeather": {
+                "temperature": 0.59,
+                "feelsLike": -5.61,
+                "minTemperature": 0.59,
+                "maxTemperature": 0.59,
+                "seaLevelPressure": 991,
+                "groundLevelPressure": 969,
+                "pressure": 991,
+                "humidity": 78
+            },
+            "weatherConditions": {
+                "id": 600,
+                "icon": "13d",
+                "description": "light snow",
+                "weatherType": "Snow"
+            },
+            "cloudinessPercentage": 99,
+            "windConditions": {
+                "speed": 8.14,
+                "degree": 277,
+                "gust": 14.91
+            },
+            "visibility": 10000,
+            "probabilityOfPrecipitation": 0.31,
+            "snowConditions": {
+                "lastThreeHour": 0.12
+            },
+            "rainConditions": {
+                "lastThreeHour": 0
+            },
+            "timestamp": {
+                "UTC": "2024-01-10 15:00:00"
+            }
+        },
+        "1704909600": {
+            "forecastWeather": {
+                "temperature": 1.85,
+                "feelsLike": -3.94,
+                "minTemperature": 1.85,
+                "maxTemperature": 1.85,
+                "seaLevelPressure": 995,
+                "groundLevelPressure": 973,
+                "pressure": 995,
+                "humidity": 75
+            },
+            "weatherConditions": {
+                "id": 804,
+                "icon": "04d",
+                "description": "overcast clouds",
+                "weatherType": "Clouds"
+            },
+            "cloudinessPercentage": 96,
+            "windConditions": {
+                "speed": 8.06,
+                "degree": 279,
+                "gust": 14.49
+            },
+            "visibility": 10000,
+            "probabilityOfPrecipitation": 0.11,
+            "snowConditions": {
+                "lastThreeHour": 0
+            },
+            "rainConditions": {
+                "lastThreeHour": 0
+            },
+            "timestamp": {
+                "UTC": "2024-01-10 18:00:00"
+            }
+        },
+        "1704920400": {
+            "forecastWeather": {
+                "temperature": 1.85,
+                "feelsLike": -3.38,
+                "minTemperature": 1.85,
+                "maxTemperature": 1.85,
+                "seaLevelPressure": 1000,
+                "groundLevelPressure": 978,
+                "pressure": 1000,
+                "humidity": 73
+            },
+            "weatherConditions": {
+                "id": 804,
+                "icon": "04d",
+                "description": "overcast clouds",
+                "weatherType": "Clouds"
+            },
+            "cloudinessPercentage": 99,
+            "windConditions": {
+                "speed": 6.63,
+                "degree": 270,
+                "gust": 12.57
+            },
+            "visibility": 10000,
+            "probabilityOfPrecipitation": 0,
+            "snowConditions": {
+                "lastThreeHour": 0
+            },
+            "rainConditions": {
+                "lastThreeHour": 0
+            },
+            "timestamp": {
+                "UTC": "2024-01-10 21:00:00"
+            }
+        },
+        "1704931200": {
+            "forecastWeather": {
+                "temperature": 0.42,
+                "feelsLike": -4.17,
+                "minTemperature": 0.42,
+                "maxTemperature": 0.42,
+                "seaLevelPressure": 1003,
+                "groundLevelPressure": 981,
+                "pressure": 1003,
+                "humidity": 79
+            },
+            "weatherConditions": {
+                "id": 804,
+                "icon": "04n",
+                "description": "overcast clouds",
+                "weatherType": "Clouds"
+            },
+            "cloudinessPercentage": 86,
+            "windConditions": {
+                "speed": 4.63,
+                "degree": 256,
+                "gust": 9.97
+            },
+            "visibility": 10000,
+            "probabilityOfPrecipitation": 0,
+            "snowConditions": {
+                "lastThreeHour": 0
+            },
+            "rainConditions": {
+                "lastThreeHour": 0
+            },
+            "timestamp": {
+                "UTC": "2024-01-11 00:00:00"
+            }
+        },
+        "1704942000": {
+            "forecastWeather": {
+                "temperature": 0.51,
+                "feelsLike": -4.09,
+                "minTemperature": 0.51,
+                "maxTemperature": 0.51,
+                "seaLevelPressure": 1005,
+                "groundLevelPressure": 982,
+                "pressure": 1005,
+                "humidity": 74
+            },
+            "weatherConditions": {
+                "id": 804,
+                "icon": "04n",
+                "description": "overcast clouds",
+                "weatherType": "Clouds"
+            },
+            "cloudinessPercentage": 96,
+            "windConditions": {
+                "speed": 4.68,
+                "degree": 241,
+                "gust": 8.54
+            },
+            "visibility": 10000,
+            "probabilityOfPrecipitation": 0,
+            "snowConditions": {
+                "lastThreeHour": 0
+            },
+            "rainConditions": {
+                "lastThreeHour": 0
+            },
+            "timestamp": {
+                "UTC": "2024-01-11 03:00:00"
+            }
+        },
+        "1704952800": {
+            "forecastWeather": {
+                "temperature": 0.2,
+                "feelsLike": -3.96,
+                "minTemperature": 0.2,
+                "maxTemperature": 0.2,
+                "seaLevelPressure": 1006,
+                "groundLevelPressure": 983,
+                "pressure": 1006,
+                "humidity": 74
+            },
+            "weatherConditions": {
+                "id": 804,
+                "icon": "04n",
+                "description": "overcast clouds",
+                "weatherType": "Clouds"
+            },
+            "cloudinessPercentage": 98,
+            "windConditions": {
+                "speed": 3.89,
+                "degree": 234,
+                "gust": 9.77
+            },
+            "visibility": 10000,
+            "probabilityOfPrecipitation": 0,
+            "snowConditions": {
+                "lastThreeHour": 0
+            },
+            "rainConditions": {
+                "lastThreeHour": 0
+            },
+            "timestamp": {
+                "UTC": "2024-01-11 06:00:00"
+            }
+        },
+        "1704963600": {
+            "forecastWeather": {
+                "temperature": 0.41,
+                "feelsLike": -3.31,
+                "minTemperature": 0.41,
+                "maxTemperature": 0.41,
+                "seaLevelPressure": 1004,
+                "groundLevelPressure": 981,
+                "pressure": 1004,
+                "humidity": 79
+            },
+            "weatherConditions": {
+                "id": 804,
+                "icon": "04n",
+                "description": "overcast clouds",
+                "weatherType": "Clouds"
+            },
+            "cloudinessPercentage": 100,
+            "windConditions": {
+                "speed": 3.36,
+                "degree": 180,
+                "gust": 7.71
+            },
+            "visibility": 10000,
+            "probabilityOfPrecipitation": 0,
+            "snowConditions": {
+                "lastThreeHour": 0
+            },
+            "rainConditions": {
+                "lastThreeHour": 0
+            },
+            "timestamp": {
+                "UTC": "2024-01-11 09:00:00"
+            }
+        },
+        "1704974400": {
+            "forecastWeather": {
+                "temperature": -0.02,
+                "feelsLike": -4.42,
+                "minTemperature": -0.02,
+                "maxTemperature": -0.02,
+                "seaLevelPressure": 1004,
+                "groundLevelPressure": 981,
+                "pressure": 1004,
+                "humidity": 97
+            },
+            "weatherConditions": {
+                "id": 600,
+                "icon": "13n",
+                "description": "light snow",
+                "weatherType": "Snow"
+            },
+            "cloudinessPercentage": 100,
+            "windConditions": {
+                "speed": 4.16,
+                "degree": 198,
+                "gust": 11.11
+            },
+            "visibility": 145,
+            "probabilityOfPrecipitation": 0.85,
+            "snowConditions": {
+                "lastThreeHour": 0.89
+            },
+            "rainConditions": {
+                "lastThreeHour": 0
+            },
+            "timestamp": {
+                "UTC": "2024-01-11 12:00:00"
+            }
+        },
+        "1704985200": {
+            "forecastWeather": {
+                "temperature": 0.97,
+                "feelsLike": -3.76,
+                "minTemperature": 0.97,
+                "maxTemperature": 0.97,
+                "seaLevelPressure": 1006,
+                "groundLevelPressure": 984,
+                "pressure": 1006,
+                "humidity": 87
+            },
+            "weatherConditions": {
+                "id": 600,
+                "icon": "13d",
+                "description": "light snow",
+                "weatherType": "Snow"
+            },
+            "cloudinessPercentage": 99,
+            "windConditions": {
+                "speed": 5.1,
+                "degree": 235,
+                "gust": 10.96
+            },
+            "visibility": 10000,
+            "probabilityOfPrecipitation": 0.61,
+            "snowConditions": {
+                "lastThreeHour": 0.32
+            },
+            "rainConditions": {
+                "lastThreeHour": 0
+            },
+            "timestamp": {
+                "UTC": "2024-01-11 15:00:00"
+            }
+        },
+        "1704996000": {
+            "forecastWeather": {
+                "temperature": 2.3,
+                "feelsLike": -2.23,
+                "minTemperature": 2.3,
+                "maxTemperature": 2.3,
+                "seaLevelPressure": 1009,
+                "groundLevelPressure": 986,
+                "pressure": 1009,
+                "humidity": 79
+            },
+            "weatherConditions": {
+                "id": 804,
+                "icon": "04d",
+                "description": "overcast clouds",
+                "weatherType": "Clouds"
+            },
+            "cloudinessPercentage": 98,
+            "windConditions": {
+                "speed": 5.37,
+                "degree": 259,
+                "gust": 9.97
+            },
+            "visibility": 10000,
+            "probabilityOfPrecipitation": 0.3,
+            "snowConditions": {
+                "lastThreeHour": 0
+            },
+            "rainConditions": {
+                "lastThreeHour": 0
+            },
+            "timestamp": {
+                "UTC": "2024-01-11 18:00:00"
+            }
+        },
+        "1705006800": {
+            "forecastWeather": {
+                "temperature": 2.47,
+                "feelsLike": -1.55,
+                "minTemperature": 2.47,
+                "maxTemperature": 2.47,
+                "seaLevelPressure": 1012,
+                "groundLevelPressure": 990,
+                "pressure": 1012,
+                "humidity": 78
+            },
+            "weatherConditions": {
+                "id": 804,
+                "icon": "04d",
+                "description": "overcast clouds",
+                "weatherType": "Clouds"
+            },
+            "cloudinessPercentage": 92,
+            "windConditions": {
+                "speed": 4.5,
+                "degree": 274,
+                "gust": 8.38
+            },
+            "visibility": 10000,
+            "probabilityOfPrecipitation": 0.03,
+            "snowConditions": {
+                "lastThreeHour": 0
+            },
+            "rainConditions": {
+                "lastThreeHour": 0
+            },
+            "timestamp": {
+                "UTC": "2024-01-11 21:00:00"
+            }
+        },
+        "1705017600": {
+            "forecastWeather": {
+                "temperature": 0.53,
+                "feelsLike": -2.07,
+                "minTemperature": 0.53,
+                "maxTemperature": 0.53,
+                "seaLevelPressure": 1016,
+                "groundLevelPressure": 993,
+                "pressure": 1016,
+                "humidity": 86
+            },
+            "weatherConditions": {
+                "id": 803,
+                "icon": "04n",
+                "description": "broken clouds",
+                "weatherType": "Clouds"
+            },
+            "cloudinessPercentage": 70,
+            "windConditions": {
+                "speed": 2.2,
+                "degree": 282,
+                "gust": 5.84
+            },
+            "visibility": 10000,
+            "probabilityOfPrecipitation": 0,
+            "snowConditions": {
+                "lastThreeHour": 0
+            },
+            "rainConditions": {
+                "lastThreeHour": 0
+            },
+            "timestamp": {
+                "UTC": "2024-01-12 00:00:00"
+            }
+        }
+    }
+}

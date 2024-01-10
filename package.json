@@ -4,8 +4,8 @@
   "description": "backend app for weather updates",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "start:dev": "nodemon index.js",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
     "test": "npm test"
   },
   "repository": {
@@ -24,9 +24,11 @@
   "dependencies": {
     "axios": "^1.6.2",
     "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
     "nodemon": "^3.0.2",
     "otplib": "^12.0.1",
     "qrcode": "^1.5.3"
