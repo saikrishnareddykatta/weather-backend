@@ -1,0 +1,18 @@
+{
+    "latitude": 32.8969984,
+    "longitude": -117.1679965,
+    "geographics": {
+        "cityName": "San Diego",
+        "country": "United States"
+    },
+    "locationComponents": {
+        "type": "road",
+        "city": "San Diego",
+        "county": "San Diego County",
+        "state": "California",
+        "stateCode": "CA",
+        "country": "United States",
+        "countryCode": "us"
+    },
+    "formattedLocation": "Atman Way, San Diego, CA 92121, United States of America"
+}

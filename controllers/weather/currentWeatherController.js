@@ -5,11 +5,18 @@ const currentWeather = async (req, res) => {
   try {
     const response = await getCoordinates(req, res);
     if (response.status === 200) {
-      const { lat, lng } = response.data;
+      const { geoLocations, timezone, cityComponents, formatted } =
+        response.data;
+      const { lat, lng } = geoLocations;
       const currentResponse = await getCurrentWeather(lat, lng);
       if (currentResponse.status === 200) {
         const { data } = currentResponse;
-        const weatherResponse = currentWeatherResponse(data);
+        const weatherResponse = currentWeatherResponse(
+          data,
+          timezone,
+          cityComponents,
+          formatted
+        );
         res.status(200).json(weatherResponse);
       } else {
         const { status, errorMessage } = currentResponse;

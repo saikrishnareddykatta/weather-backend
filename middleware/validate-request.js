@@ -16,6 +16,15 @@ const validateRegisterRequest = (req, res, next) => {
   }
 };
 
+const validateCityRequest = (req, res, next) => {
+  const { latitude, longitude } = req.body;
+  if (!latitude || !longitude) {
+    return res.status(401).json({ errorMessage: "Error in the Payload!!!" });
+  } else {
+    next();
+  }
+};
+
 const validateTwoFactorRequest = (req, res, next) => {
   const { username, code } = req.body;
   if (!username || !code) {
@@ -37,6 +46,7 @@ const validateWeatherRequest = (req, res, next) => {
 module.exports = {
   validateLoginRequest,
   validateRegisterRequest,
+  validateCityRequest,
   validateTwoFactorRequest,
   validateWeatherRequest,
 };

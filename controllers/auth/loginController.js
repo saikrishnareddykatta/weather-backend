@@ -32,7 +32,11 @@ const login = async (req, res) => {
       const token = generateToken(payload);
       if (comparedValue) {
         if (twoFactorEnabled) {
-          res.cookie("jwt", token, { httpOnly: true });
+          const halfHour = 1000 * 30 * 60;
+          res.cookie("jwt", token, {
+            httpOnly: true,
+            expires: new Date(Date.now() + halfHour),
+          });
           res.status(200).json({
             operation,
             message,

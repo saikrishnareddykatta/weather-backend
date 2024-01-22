@@ -9,12 +9,17 @@ const {
 } = require("../controllers/weather/forecastedWeatherContoller");
 const { marineWeather } = require("../controllers/weather/marineController");
 const { airQuality } = require("../controllers/weather/airQualityController");
+const { cityDetails } = require("../controllers/weather/cityDetailsController");
 
 // Middleware
 const { verifyToken } = require("../middleware/verify-token");
-const { validateWeatherRequest } = require("../middleware/validate-request");
+const {
+  validateCityRequest,
+  validateWeatherRequest,
+} = require("../middleware/validate-request");
 
 // Routes
+router.post("/cityDetails", validateCityRequest, verifyToken, cityDetails);
 router.post(
   "/currentWeather",
   validateWeatherRequest,

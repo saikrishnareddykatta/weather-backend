@@ -1,4 +1,36 @@
-const currentWeatherResponse = (weatherResponse) => {
+const cityDetailsResponse = (data) => {
+  const cityComponents = data.components;
+  const latitude = data.geometry.lat;
+  const longitude = data.geometry.lng;
+  const geographics = {
+    cityName: data.components.city,
+    country: data.components.country,
+  };
+  const locationComponents = {
+    type: cityComponents._type,
+    city: cityComponents.city,
+    county: cityComponents.county,
+    state: cityComponents.state,
+    stateCode: cityComponents.state_code,
+    country: cityComponents.country,
+    countryCode: cityComponents.country_code,
+  };
+  const response = {
+    latitude,
+    longitude,
+    geographics,
+    locationComponents,
+    formattedLocation: data.formatted,
+  };
+  return response;
+};
+
+const currentWeatherResponse = (
+  weatherResponse,
+  timezoneResponse,
+  cityComponents,
+  formatted
+) => {
   const { lat, lon } = weatherResponse?.coord;
   const { id, icon, description } = weatherResponse?.weather[0];
   const weatherConditions = {
@@ -46,6 +78,13 @@ const currentWeatherResponse = (weatherResponse) => {
     country,
     cityName: name,
   };
+  const timezoneData = {
+    name: timezoneResponse.name,
+    nowInDST: timezoneResponse.now_in_dst,
+    offsetSec: timezoneResponse.offset_sec,
+    offsetString: timezoneResponse.offset_string,
+    shortName: timezoneResponse.short_name,
+  };
   const currentWeather = {};
   currentWeather[dt] = {
     currentWeatherInfo,
@@ -56,17 +95,34 @@ const currentWeatherResponse = (weatherResponse) => {
     snowConditions,
     rainConditions,
   };
+  const locationComponents = {
+    type: cityComponents._type,
+    city: cityComponents.city,
+    county: cityComponents.county,
+    state: cityComponents.state,
+    stateCode: cityComponents.state_code,
+    country: cityComponents.country,
+    countryCode: cityComponents.country_code,
+  };
   const response = {
     latitude: lat,
     longitude: lon,
     geographics,
+    timezone: timezoneData,
+    locationComponents,
+    formattedLocation: formatted,
     timestamps,
     currentWeather,
   };
   return response;
 };
 
-const forecastWeatherResponse = (forecastResponse) => {
+const forecastWeatherResponse = (
+  forecastResponse,
+  timezoneResponse,
+  cityComponents,
+  formatted
+) => {
   const { name, country, coord, population, timezone, sunrise, sunset } =
     forecastResponse.city;
   const { lat, lon } = coord;
@@ -76,10 +132,29 @@ const forecastWeatherResponse = (forecastResponse) => {
     population,
   };
   const timestamps = { sunrise, sunset, timezoneShift: timezone };
+  const timezoneData = {
+    name: timezoneResponse.name,
+    nowInDST: timezoneResponse.now_in_dst,
+    offsetSec: timezoneResponse.offset_sec,
+    offsetString: timezoneResponse.offset_string,
+    shortName: timezoneResponse.short_name,
+  };
+  const locationComponents = {
+    type: cityComponents._type,
+    city: cityComponents.city,
+    county: cityComponents.county,
+    state: cityComponents.state,
+    stateCode: cityComponents.state_code,
+    country: cityComponents.country,
+    countryCode: cityComponents.country_code,
+  };
   const formattedData = {
     latitude: lat,
     longitude: lon,
     geographics,
+    timezone: timezoneData,
+    locationComponents,
+    formattedLocation: formatted,
     timestamps,
     forecastedWeather: {},
   };
@@ -136,7 +211,12 @@ const forecastWeatherResponse = (forecastResponse) => {
   return formattedData;
 };
 
-const marineWeatherResponse = (marineResponse) => {
+const marineWeatherResponse = (
+  marineResponse,
+  timezoneResponse,
+  cityComponents,
+  formatted
+) => {
   const { latitude, longitude, elevation, current_units, current } =
     marineResponse;
   const currentMarineUnits = {
@@ -169,19 +249,43 @@ const marineWeatherResponse = (marineResponse) => {
     swellWavePeriod: current.swell_wave_period,
     swellWavePeakPeriod: current.swell_wave_peak_period,
   };
+  const timezone = {
+    name: timezoneResponse.name,
+    nowInDST: timezoneResponse.now_in_dst,
+    offsetSec: timezoneResponse.offset_sec,
+    offsetString: timezoneResponse.offset_string,
+    shortName: timezoneResponse.short_name,
+  };
+  const locationComponents = {
+    type: cityComponents._type,
+    city: cityComponents.city,
+    county: cityComponents.county,
+    state: cityComponents.state,
+    stateCode: cityComponents.state_code,
+    country: cityComponents.country,
+    countryCode: cityComponents.country_code,
+  };
   const response = {
     latitude,
     longitude,
     elevation,
+    timezone,
+    locationComponents,
+    formattedLocation: formatted,
     currentMarineUnits,
     currentMarineWeather,
   };
   return response;
 };
 
-const airQualityWeatherResponse = (aqResponse) => {
+const airQualityWeatherResponse = (
+  aqResponse,
+  timezoneResponse,
+  cityComponents,
+  formatted
+) => {
   const { latitude, longitude, elevation, current_units, current } = aqResponse;
-  const qirQualityUnits = {
+  const airQualityUnits = {
     time: current_units.time,
     interval: current_units.interval,
     europeanAQI: current_units.european_aqi,
@@ -209,17 +313,37 @@ const airQualityWeatherResponse = (aqResponse) => {
     uvIndexClearSky: current.uv_index_clear_sky,
     ammonia: current.ammonia,
   };
+  const timezone = {
+    name: timezoneResponse.name,
+    nowInDST: timezoneResponse.now_in_dst,
+    offsetSec: timezoneResponse.offset_sec,
+    offsetString: timezoneResponse.offset_string,
+    shortName: timezoneResponse.short_name,
+  };
+  const locationComponents = {
+    type: cityComponents._type,
+    city: cityComponents.city,
+    county: cityComponents.county,
+    state: cityComponents.state,
+    stateCode: cityComponents.state_code,
+    country: cityComponents.country,
+    countryCode: cityComponents.country_code,
+  };
   const response = {
     latitude,
     longitude,
     elevation,
-    qirQualityUnits,
+    timezone,
+    locationComponents,
+    formattedLocation: formatted,
+    airQualityUnits,
     airQualityWeather,
   };
   return response;
 };
 
 module.exports = {
+  cityDetailsResponse,
   currentWeatherResponse,
   forecastWeatherResponse,
   marineWeatherResponse,

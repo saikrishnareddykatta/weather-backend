@@ -1,5 +1,31 @@
 const axios = require("axios");
 
+const getCityDetails = async (req, res) => {
+  const { latitude, longitude } = req.body;
+  try {
+    const response = await axios.get(
+      `https://api.opencagedata.com/geocode/v1/json?key=${process.env.GEO_API_KEY}&q=${latitude}+${longitude}&pretty=1&no_annotations=1`
+    );
+    if (response.status === 200) {
+      return {
+        status: 200,
+        data: response.data.results[0],
+      };
+    } else {
+      return {
+        status: 500,
+        errorMessage: "API Failed due to Internal Issues",
+      };
+    }
+  } catch (error) {
+    return {
+      status: 404,
+      errorMessage: "Unable to fetch the data from the API",
+      error,
+    };
+  }
+};
+
 const getCoordinates = async (req, res) => {
   const { cityName, countryName } = req.body;
   try {
@@ -8,9 +34,17 @@ const getCoordinates = async (req, res) => {
     );
     if (response.status === 200) {
       const geoLocations = response.data.results[0].geometry;
+      const timezone = response.data.results[0].annotations.timezone;
+      const { components, formatted } = response.data.results[0];
+      const cityInfo = {
+        geoLocations,
+        timezone,
+        cityComponents: components,
+        formatted,
+      };
       return {
         status: 200,
-        data: geoLocations,
+        data: cityInfo,
       };
     } else {
       return {
@@ -99,7 +133,7 @@ const getMarineWeather = async (lat, lon) => {
     }
   } catch (error) {
     return {
-      status: 400,
+      status: 404,
       errorMessage: "No marine data is available for this location",
       error,
     };
@@ -133,6 +167,7 @@ const getAirQuality = async (lat, lon) => {
 };
 
 module.exports = {
+  getCityDetails,
   getCoordinates,
   getCurrentWeather,
   getForecastWeather,

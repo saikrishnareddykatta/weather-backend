@@ -5,12 +5,18 @@ const forecastWeather = async (req, res) => {
   try {
     const response = await getCoordinates(req, res);
     if (response.status === 200) {
-      const { lat, lng } = response.data;
+      const { geoLocations, timezone, cityComponents, formatted } =
+        response.data;
+      const { lat, lng } = geoLocations;
       const forecastResponse = await getForecastWeather(lat, lng);
       if (forecastResponse.status === 200) {
         const { data } = forecastResponse;
-        // need to add a helper function to format the data
-        const forecastMutipleHoursResponse = forecastWeatherResponse(data);
+        const forecastMutipleHoursResponse = forecastWeatherResponse(
+          data,
+          timezone,
+          cityComponents,
+          formatted
+        );
         return res.status(200).json(forecastMutipleHoursResponse);
       } else {
         const { status, errorMessage } = forecastResponse;
