@@ -19,7 +19,6 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: `${process.env.FRONTEND_URL}`,
-    // origin: "http://localhost:3000",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
@@ -27,9 +26,9 @@ app.use(
 app.use(express.json());
 
 // Routes Middleware
-app.use("/testRoute", testRoute);
-app.use("/auth", authRoute);
-app.use("/weather", weatherRoute);
+app.use("/api/v1/testRoute", testRoute);
+app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/weather", weatherRoute);
 
 // Error Handling Middleware
 app.use("*", notFound); // Routes to Not Found when unhandled route is entered
