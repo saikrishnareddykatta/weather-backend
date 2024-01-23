@@ -1,0 +1,35 @@
+{
+    "latitude": 29.5,
+    "longitude": -95,
+    "elevation": 0,
+    "currentMarineUnits": {
+        "time": "unixtime",
+        "interval": "seconds",
+        "waveHeight": "m",
+        "waveDirection": "°",
+        "wavePeriod": "s",
+        "windWaveHeight": "m",
+        "windWaveDirection": "°",
+        "windWavePeriod": "s",
+        "windWavePeakPeriod": "s",
+        "swellWaveHeight": "m",
+        "swellWaveDirection": "°",
+        "swellWavePeriod": "s",
+        "swellWavePeakPeriod": "s"
+    },
+    "currentMarineWeather": {
+        "time": 1704913200,
+        "interval": 3600,
+        "waveHeight": 0.38,
+        "waveDirection": 171,
+        "wavePeriod": 3.85,
+        "windWaveHeight": 0.3,
+        "windWaveDirection": 184,
+        "windWavePeriod": 2.55,
+        "windWavePeakPeriod": 2.7,
+        "swellWaveHeight": 0.22,
+        "swellWaveDirection": 145,
+        "swellWavePeriod": 8.05,
+        "swellWavePeakPeriod": 10.45
+    }
+}
