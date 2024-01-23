@@ -2,7 +2,7 @@
   "name": "weather-backend",
   "version": "1.0.0",
   "description": "backend app for weather updates",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
